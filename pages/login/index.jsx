@@ -20,7 +20,7 @@ const login = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form action="post">
             <input
                 id="email"
                 type="text"
@@ -36,7 +36,7 @@ const login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Mot de passe"
             />
-            <button>Se connecter</button>
+            <button type="button" onClick={() => handleSubmit()}>Se connecter</button>
         </form>
     )
 }

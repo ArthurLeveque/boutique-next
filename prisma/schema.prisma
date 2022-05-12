@@ -23,6 +23,7 @@ model Product {
   id            Int       @id @default(autoincrement())
   name          String    @unique
   description   String
+  price         Decimal
   userId        Int
   user          User      @relation(fields: [userId], references: [id])
   carts         Cart[]

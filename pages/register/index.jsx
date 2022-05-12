@@ -23,7 +23,7 @@ const register = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form action="post">
                 <label htmlFor="input-username-register">Name</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} id='input-username-register' />
 
@@ -33,7 +33,7 @@ const register = () => {
                 <label htmlFor="input-password-register">Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id='input-password-register'/>
 
-                <button>S'inscrire</button>
+                <button type="button" onClick={() => handleSubmit()}>S'inscrire</button>
             </form>
         </div>
     );
