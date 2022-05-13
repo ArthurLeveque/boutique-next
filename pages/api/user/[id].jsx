@@ -2,16 +2,13 @@ import prisma from "../../../utils/prisma";
 
 export default async function handler(req, res) {
     try {
-        const results = await prisma.cart.findMany({
+        const { id } = req.query
+        const post = await prisma.user.findUnique({
             where: {
-                userId: req.body.userId
-            },
-            include: {
-                product: true,
-                user: true
+              id: parseInt(id),
             }
         });
-        return res.status(200).json(results);
+        return res.status(200).json(post);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
