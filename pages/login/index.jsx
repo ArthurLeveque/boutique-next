@@ -20,24 +20,28 @@ const login = () => {
     }
 
     return (
-        <form action="post">
-            <input
-                id="email"
-                type="text"
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-            />
+        <div className='flex justify-center'>
+            <form action="post" className='max-w-screen-lg flex justify-center flex-col'>
+                <input
+                    id="email"
+                    type="text"
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    className='my-2 border-black border-2'
+                />
 
-            <input
-                id="password"
-                type="password"
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Mot de passe"
-            />
-            <button type="button" onClick={() => handleSubmit()}>Se connecter</button>
-        </form>
+                <input
+                    id="password"
+                    type="password"
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Mot de passe"
+                    className='my-2 border-black border-2'
+                />
+                <button type="button" onClick={() => handleSubmit()} className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>Se connecter</button>
+            </form>
+        </div>
     )
 }
 

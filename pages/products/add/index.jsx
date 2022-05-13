@@ -31,8 +31,8 @@ const index = () => {
     }, [userCookie])
 
     return (
-        <div>
-            <form action="post">
+        <div className='flex justify-center'>
+            <form action="post" className='max-w-screen-lg flex justify-center flex-col'>
                 <label htmlFor="input-name-product">Nom du produit</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} id='input-name-product' />
 
@@ -42,7 +42,7 @@ const index = () => {
                 <label htmlFor="input-price-product">Prix</label>
                 <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} id='input-price-product' />
 
-                <button type="button" onClick={() => addProduct()}>post</button>
+                <button type="button" onClick={() => addProduct()}>Poster l'offre</button>
             </form>
         </div>
     );

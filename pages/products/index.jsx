@@ -18,15 +18,15 @@ const products = () => {
 
     return (
         <div>     
-            <h1>Les produits</h1>
+            <h1 className='text-center text-4xl font-bold'>Les produits</h1>
 
-            <ul>
+            <ul className='flex flex-wrap mt-10'>
                 {!loaded &&
                     <p>Loading...</p>
                 }
                 {loaded && productsData.map(product => {
                     return (
-                        <li key={product.id}><Link href={`/products/${product.id}`}>{product.name}</Link></li>
+                        <li key={product.id} className="border-2 border-black px-8 py-2 w-1/5 text-center"><Link href={`/products/${product.id}`}>{product.name}</Link></li>
                     )
                 })}
             </ul>

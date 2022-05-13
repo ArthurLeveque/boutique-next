@@ -92,7 +92,7 @@ const products = () => {
 
     return (
         <div>     
-            <h1>Votre panier</h1>
+            <h1 className='text-center text-4xl font-bold'>Votre panier</h1>
 
             {!loaded &&
                     <p>Loading...</p>
@@ -109,7 +109,7 @@ const products = () => {
                     </ul>
                     <p>Prix total : {totalPrice}€</p>
 
-                    <button type="button" onClick={() => makePayment()}>Acheter</button>
+                    <button type="button" onClick={() => makePayment()} className="bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md shadow-xl drop-shadow-2xl mt-5">Acheter</button>
                 </div>
             }
         </div>
