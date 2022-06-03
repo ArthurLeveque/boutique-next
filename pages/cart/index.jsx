@@ -20,7 +20,7 @@ const products = () => {
         const products = await axios.get("/api/cart", {userId: userID})
         setCartData(products.data);
         console.log(products.data);
-        if(products.data[0].user){
+        if(products.data[0]){
           setUserData(products.data[0].user)
         }
         setLoaded(true);
@@ -51,8 +51,6 @@ const products = () => {
       }
   
       // Make API call to the serverless API
-      // const data = await axios.post("/api/razorpay", {userData: userData});
-
       const data = await fetch("/api/razorpay", { 
         method: "POST", 
         body: JSON.stringify({userId: userData.id})
@@ -70,7 +68,8 @@ const products = () => {
         //   alert(response.razorpay_payment_id);
         //   alert(response.razorpay_order_id);
         //   alert(response.razorpay_signature);
-          router.push('/confirmation')
+          axios.post("/api/cart/empty", {userId : userData.id});
+          router.push('/confirmation');
         },
         prefill: {
           name: userData.name,
@@ -99,15 +98,31 @@ const products = () => {
             }
             {loaded && 
                 <div>
-                    <ul>
+                    <table className='border-2'>
+                      <thead>
+                        <tr>
+                          <td className='p-3 border-2'>Produit</td>
+                          <td className='p-3 border-2'>Prix unitaire</td>
+                          <td className='p-3 border-2'>Quantité</td>
+                        </tr>
+                      </thead>
                         {cartData.map(product => {
                             totalPrice = totalPrice + (product.product.price * product.quantity)
                             return (
-                                <li key={product.id}><Link href={`/products/${product.product.id}`}>{product.product.name}</Link> {product.product.price}€ x{product.quantity}</li>
+                                <tr key={product.id}>
+                                  <td className='p-3 border-2 text-sky-700'><Link href={`/products/${product.product.id}`}>{product.product.name}</Link></td>
+                                  <td className='p-3 border-2'>{product.product.price}€</td>
+                                  <td className='p-3 border-2'>x{product.quantity}</td>
+                                </tr>
                             )
                         })}
-                    </ul>
-                    <p>Prix total : {totalPrice}€</p>
+                        <tfoot>
+                          <tr>
+                            <td colspan='3' className='p-3 font-bold'>Prix total : {totalPrice}€</td>
+                          </tr>
+                        </tfoot>
+                    </table>
+                    <p></p>
 
                     <button type="button" onClick={() => makePayment()} className="bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md shadow-xl drop-shadow-2xl mt-5">Acheter</button>
                 </div>

@@ -59,7 +59,7 @@ const index = () => {
                     </div>
 
                     {userID &&
-                        <button type="button" onClick={() => addToCart()}>Ajouter au panier</button>
+                        <button type="button" onClick={() => addToCart()} className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>Ajouter au panier</button>
                     }
                 </div>
             }

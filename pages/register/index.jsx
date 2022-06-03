@@ -22,18 +22,18 @@ const register = () => {
     }
 
     return (
-        <div>
-            <form action="post">
+        <div className='flex flex-col items-center'>
+            <form action="post" className='max-w-screen-lg flex justify-center flex-col'>
                 <label htmlFor="input-username-register">Name</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} id='input-username-register' />
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} id='input-username-register' className='my-2 border-black border-2' />
 
                 <label htmlFor="input-email-register">Email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id='input-email-register' />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id='input-email-register' className='my-2 border-black border-2' />
 
                 <label htmlFor="input-password-register">Password</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id='input-password-register'/>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id='input-password-register' className='my-2 border-black border-2'/>
 
-                <button type="button" onClick={() => handleSubmit()}>S'inscrire</button>
+                <button type="button" onClick={() => handleSubmit()} className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>S'inscrire</button>
             </form>
         </div>
     );
