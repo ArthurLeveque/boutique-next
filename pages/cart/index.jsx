@@ -26,6 +26,11 @@ const cart = () => {
         setLoaded(true);
     };
 
+    const removeFromCart = ( cartId ) => {
+      axios.post("/api/cart/remove", {id: cartId});
+      router.reload(window.location.pathname)
+    };
+
     const initializeRazorpay = () => {
         return new Promise((resolve) => {
           const script = document.createElement("script");
@@ -104,6 +109,7 @@ const cart = () => {
                           <td className='p-3 border-2'>Produit</td>
                           <td className='p-3 border-2'>Prix unitaire</td>
                           <td className='p-3 border-2'>Quantité</td>
+                          <td className='p-3 border-2'>Action</td>
                         </tr>
                       </thead>
                       <tbody>
@@ -114,13 +120,14 @@ const cart = () => {
                                   <td className='p-3 border-2 text-sky-700'><Link href={`/products/${product.product.id}`}>{product.product.name}</Link></td>
                                   <td className='p-3 border-2'>{product.product.price}€</td>
                                   <td className='p-3 border-2'>x{product.quantity}</td>
+                                  <td className='p-3 border-2'><button type="button" onClick={() => removeFromCart(product.id)} className='text-red-500'>Supprimer</button></td>
                                 </tr>
                             )
                         })}
                       </tbody>
                       <tfoot>
                         <tr>
-                          <td colSpan='3' className='p-3 font-bold'>Prix total : {totalPrice}€</td>
+                          <td colSpan='4' className='p-3 font-bold'>Prix total : {totalPrice}€</td>
                         </tr>
                       </tfoot>
                   </table>
