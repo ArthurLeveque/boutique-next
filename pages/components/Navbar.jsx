@@ -45,6 +45,9 @@ export const Navbar = () => {
       </div>
         {userID &&
           <div className="flex flex-row space-x-10 items-center">
+            <a href="/wishlist" className="tracking-wide font-bold text-white">
+              Liste de souhait
+            </a>
             <a href="/cart" className="tracking-wide font-bold text-white">
               Panier
             </a>

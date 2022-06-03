@@ -34,6 +34,10 @@ const index = () => {
         axios.post(`/api/cart/add`, data);
     }
 
+    const addToWishlist = () => {
+        axios.post(`/api/wishlist/add`, data);
+    }
+
     useEffect(() => {
         setUserID(userCookie)
     }, [userCookie])
@@ -59,7 +63,10 @@ const index = () => {
                     </div>
 
                     {userID &&
-                        <button type="button" onClick={() => addToCart()} className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>Ajouter au panier</button>
+                        <div className='flex flex-col items-start'>
+                            <button type="button" onClick={() => addToCart()} className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>Ajouter au panier</button>
+                            <button type="button" onClick={() => addToWishlist()} className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>Ajouter à ma liste de souhait</button>
+                        </div>
                     }
                 </div>
             }

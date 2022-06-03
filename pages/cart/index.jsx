@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 
-const products = () => {
+const cart = () => {
     const router = useRouter();
     const [cartData, setCartData] = useState();
     const [userData, setUserData] = useState();
@@ -106,6 +106,7 @@ const products = () => {
                           <td className='p-3 border-2'>Quantité</td>
                         </tr>
                       </thead>
+                      <tbody>
                         {cartData.map(product => {
                             totalPrice = totalPrice + (product.product.price * product.quantity)
                             return (
@@ -116,19 +117,19 @@ const products = () => {
                                 </tr>
                             )
                         })}
-                        <tfoot>
-                          <tr>
-                            <td colspan='3' className='p-3 font-bold'>Prix total : {totalPrice}€</td>
-                          </tr>
-                        </tfoot>
-                    </table>
-                    <p></p>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colSpan='3' className='p-3 font-bold'>Prix total : {totalPrice}€</td>
+                        </tr>
+                      </tfoot>
+                  </table>
 
-                    <button type="button" onClick={() => makePayment()} className="bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md shadow-xl drop-shadow-2xl mt-5">Acheter</button>
+                  <button type="button" onClick={() => makePayment()} className="bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md shadow-xl drop-shadow-2xl mt-5">Acheter</button>
                 </div>
             }
         </div>
     );
 };
 
-export default products;
+export default cart;
