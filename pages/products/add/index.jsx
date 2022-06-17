@@ -9,6 +9,7 @@ const index = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [userID, setUserID] = useState('');
+    const [imageUploaded, setImageUploaded] = useState(null);
 
     const userCookie = getCookie('userId');
 
@@ -19,12 +20,29 @@ const index = () => {
         userId: parseInt(userID)
     };
 
-    const addProduct = async () => {
+    const addProduct = async (e) => {
+        e.preventDefault();
+
         const request = await axios.post("/api/products/add", data);
-        if(request.status === 200) {
-            router.push(`/products/${request.data.id}`);
+
+        const productId = request.data.id
+        if (imageUploaded) {
+            console.log(request)
+            const formData = new FormData();
+            console.log(imageUploaded)
+            formData.append("file", imageUploaded);
+            await axios.post(`/api/products/${productId}/addImage`, formData);
         }
-    }
+
+        if(request.status === 200) {
+            router.push(`/products/${productId}`);
+        }
+    };
+
+    const handleChange = (event) => {
+        setImageUploaded(event.target.files[0]);
+        console.log(event.target.files)
+    };
 
     useEffect(() => {
         setUserID(userCookie)
@@ -32,7 +50,7 @@ const index = () => {
 
     return (
         <div className='flex justify-center'>
-            <form action="post" className='max-w-screen-lg flex justify-center flex-col'>
+            <form action="post" className='max-w-screen-lg flex justify-center flex-col' onSubmit={addProduct}>
                 <label htmlFor="input-name-product">Nom du produit</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} id='input-name-product' className='my-2 border-black border-2'/>
 
@@ -42,7 +60,14 @@ const index = () => {
                 <label htmlFor="input-price-product">Prix</label>
                 <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} id='input-price-product' className='my-2 border-black border-2'/>
 
-                <button type="button" onClick={() => addProduct()} className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>Poster l'offre</button>
+                <label htmlFor="input-image-product">Image du produit</label>
+                <input
+                    onChange={handleChange}
+                    accept=".jpg, .png, .gif, .jpeg"
+                    type="file"
+                ></input>
+
+                <button type="submit" className='my-2 bg-[#272A30] text-gray-300 px-8 text-sm py-2 rounded-md'>Poster l'offre</button>
             </form>
         </div>
     );
