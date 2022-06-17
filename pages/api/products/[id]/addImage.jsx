@@ -19,7 +19,7 @@ const saveFile = async (file, id) => {
     await prisma.image.create({
         data: {
             name: file.originalFilename,
-            productId: id
+            productId: parseInt(id)
         },
     });
 
